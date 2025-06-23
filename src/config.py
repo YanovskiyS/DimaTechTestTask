@@ -16,5 +16,7 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int
 
+    SECRET_KEY: str
+
 
 settings = Settings()

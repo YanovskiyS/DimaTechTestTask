@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class UserRequestAdd(BaseModel):
@@ -6,7 +6,15 @@ class UserRequestAdd(BaseModel):
     password: str
     first_name: str
     last_name: str
-    is_admin: bool
+    is_admin: bool = Field(False)
+
+class UserPatch(BaseModel):
+    first_name: str | None = Field(None)
+    last_name: str | None = Field(None)
+    is_admin: bool | None = Field(False)
+    email: EmailStr | None = Field(None)
+
+
 
 class UserLogin(BaseModel):
     email: EmailStr
@@ -26,6 +34,7 @@ class User(BaseModel):
     email: EmailStr
     first_name: str
     last_name: str
+    is_admin: bool
 
 class UserWithHashedPassword(User):
     hashed_password: str

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from sqlalchemy import insert, select
+from sqlalchemy import insert, select, update, delete
 
 
 class BaseRepisitory():
@@ -22,3 +22,20 @@ class BaseRepisitory():
         if model is None:
             return None
         return self.schema.model_validate(model, from_attributes=True)
+
+    async def edit(
+            self, data: BaseModel, **filter_by) -> None:
+        product_update = (
+            update(self.model)
+            .filter_by(**filter_by)
+            .values(data.model_dump())
+        )
+        await self.session.execute(product_update)
+
+
+    async def delete(self, **filter_by):
+        delete_stmt = delete(self.model).filter_by(**filter_by)
+        await self.session.execute(delete_stmt)
+
+
+
