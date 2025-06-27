@@ -1,13 +1,10 @@
 from pydantic import EmailStr, BaseModel
 from sqlalchemy import select
-from sqlalchemy.orm.sync import update
+
 
 from src.models.accounts import AccountOrm
-from src.models.transactions import TransactionsOrm
-
 from src.repositories.base import BaseRepisitory
-from src.schemas.accounts import Account
-from src.schemas.transactions import AddTransaction
+from src.schemas.accounts import Account, AccountForUser
 
 
 
@@ -17,12 +14,8 @@ class AccountRepository(BaseRepisitory):
 
 
 
-    async def  update_balance(self, data: BaseModel,  **filter_by) -> None:
-
-        product_update = (
-            update(self.model)
-            .filter_by(**filter_by)
-            .values(data.model_dump())
-        )
-        await self.session.execute(product_update)
+    async def get_my_accounts(self, **filter_by):
+        query = select(self.model).filter_by(**filter_by)
+        result = await self.session.execute(query)
+        return [AccountForUser.model_validate(model, from_attributes=True) for model in result.scalars().all()]
 

@@ -4,7 +4,7 @@ from sqlalchemy.orm import selectinload
 
 from src.models.users import UsersOrm
 from src.repositories.base import BaseRepisitory
-from src.schemas.users import User, UserWithHashedPassword
+from src.schemas.users import User, UserWithHashedPassword, UserWithRels
 
 
 class UsersRepository(BaseRepisitory):
@@ -26,9 +26,10 @@ class UsersRepository(BaseRepisitory):
         )
         result = await self.session.execute(query)
         models = result.scalars().all()
-        return models
+        return [UserWithRels.model_validate(model, from_attributes=True) for model in models]
 
     async def get_filtered(self, **filter_by):
         query = select(self.model).filter_by(**filter_by)
         result = await self.session.execute(query)
         return [self.schema.model_validate(model, from_attributes=True) for model in result.scalars().all()]
+

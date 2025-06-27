@@ -16,3 +16,8 @@ class AddTransaction(BaseModel):
     user_id: int
     account_id: int
     amount: int
+
+class TransactionForUser(BaseModel):
+    id: UUID4
+    account_id: int
+    amount: int

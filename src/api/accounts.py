@@ -14,11 +14,11 @@ router = APIRouter(prefix="/accounts", tags=["Счета"])
 @router.get("/")
 async def get_my_accounts(get_id: UserIdDep):
     async with async_session_maker() as session:
-        accounts = await AccountRepository(session).get_filtered(user_id=get_id)
+        accounts = await AccountRepository(session).get_my_accounts(user_id=get_id)
         return accounts
 
 @router.get("/")
 async def get_users_accounts(get_id:UserIdDep):
     async with async_session_maker() as session:
-        users = await UsersRepository(session).get_filtered()
+        users = await AccountRepository(session).get_my_accounts()
         return users

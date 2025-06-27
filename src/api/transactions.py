@@ -59,7 +59,7 @@ async def handle_webhook(webhook: HandleTransaction):
 @router.get("/")
 async def get_my_transactions(get_id: UserIdDep):
     async with async_session_maker() as session:
-        result = await TransactionRepository(session).get_filtered(user_id=get_id)
+        result = await TransactionRepository(session).get_my_transactions(user_id=get_id)
         return result
 
 

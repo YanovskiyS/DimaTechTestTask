@@ -14,3 +14,6 @@ class AccountBalanceUpdate(BaseModel):
     balance: float
     is_active: bool | None = Field(None)
 
+class AccountForUser(BaseModel):
+    id: int
+    balance: float
