@@ -1,26 +1,25 @@
 import sys
-from pathlib import Path
-
-# Добавляем корень проекта в PYTHONPATH
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-
 from logging.config import fileConfig
+from pathlib import Path
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from src.config import settings
+
+
+
 from src.database import Base
-from src.models.users import UsersOrm
 from src.models.accounts import AccountOrm
 from src.models.transactions import TransactionsOrm
+from src.models.users import UsersOrm
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-
 config.set_main_option("sqlalchemy.url", f"{settings.DB_URL}?async_fallback=True")
 
 # Interpret the config file for Python logging.

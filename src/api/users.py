@@ -1,7 +1,7 @@
 from fastapi import HTTPException, Response, Request
 
 from fastapi import APIRouter
-from sqlalchemy import update
+
 
 from src.api.dependencies import UserIdDep
 
@@ -54,6 +54,13 @@ async def delete_hotel(user_id: int, get_id:UserIdDep):
             raise HTTPException(status_code=401, detail="Удалять пользователя может только администратор")
 
 
+
+
+@router.get("/")
+async def get_users_accounts(get_id:UserIdDep):
+    async with async_session_maker() as session:
+        users = await UsersRepository(session).get_users_with_accounts()
+        return users
 
 
 

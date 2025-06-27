@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import String, Boolean
 
@@ -13,6 +13,9 @@ class UsersOrm(Base):
     email: Mapped[str] = mapped_column(String(100), unique=True)
     hashed_password: Mapped[str] = mapped_column(String(100))
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
+
+    accounts = relationship("AccountOrm", back_populates="user")
+    transactions = relationship("TransactionsOrm", back_populates="user")
 
     @hybrid_property
     def fullname(self):

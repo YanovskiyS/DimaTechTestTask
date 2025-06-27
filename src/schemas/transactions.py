@@ -1,8 +1,18 @@
-from pydantic import BaseModel, EmailStr, Field
 
-class Transaction(BaseModel):
+
+from pydantic import BaseModel, EmailStr, Field, UUID4
+
+
+class HandleTransaction(BaseModel):
     transaction_id: str
     user_id: int
     account_id: int
-    amount: float
+    amount: int
     signature: str
+
+
+class AddTransaction(BaseModel):
+    id: UUID4
+    user_id: int
+    account_id: int
+    amount: int

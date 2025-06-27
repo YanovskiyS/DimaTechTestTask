@@ -13,5 +13,5 @@ class AccountOrm(Base):
     balance: Mapped[float] = mapped_column(Numeric(15, 2), nullable=False, default=0.00)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
-    user = relationship("User", back_populates="accounts")
-    transactions = relationship("TransactionOrm", back_populates="account", cascade="all, delete-orphan")
+    user = relationship("UsersOrm", back_populates="accounts")
+    transactions = relationship("TransactionsOrm", back_populates="account", cascade="all, delete-orphan")
