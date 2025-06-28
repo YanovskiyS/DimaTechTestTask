@@ -3,11 +3,11 @@ from sqlalchemy import select
 
 from src.models.transactions import TransactionsOrm
 
-from src.repositories.base import BaseRepisitory
+from src.repositories.base import BaseRepository
 from src.schemas.transactions import AddTransaction, TransactionForUser
 
 
-class TransactionRepository(BaseRepisitory):
+class TransactionRepository(BaseRepository):
     model = TransactionsOrm
     schema = AddTransaction
 

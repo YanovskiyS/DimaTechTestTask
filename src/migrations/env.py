@@ -1,6 +1,6 @@
 import sys
-from logging.config import fileConfig
 from pathlib import Path
+from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
@@ -17,8 +17,11 @@ from src.models.accounts import AccountOrm
 from src.models.transactions import TransactionsOrm
 from src.models.users import UsersOrm
 
+
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
+
 config = context.config
 config.set_main_option("sqlalchemy.url", f"{settings.DB_URL}?async_fallback=True")
 
@@ -32,6 +35,11 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
+
+from src.database import Base
+from src.models.accounts import AccountOrm
+from src.models.transactions import TransactionsOrm
+from src.models.users import UsersOrm
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

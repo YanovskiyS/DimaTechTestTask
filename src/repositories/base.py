@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from sqlalchemy import insert, select, update, delete
 
 
-class BaseRepisitory():
+class BaseRepository():
     model = None
     schema: BaseModel = None
 

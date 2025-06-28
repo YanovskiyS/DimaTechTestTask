@@ -3,11 +3,11 @@ from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
 from src.models.users import UsersOrm
-from src.repositories.base import BaseRepisitory
+from src.repositories.base import BaseRepository
 from src.schemas.users import User, UserWithHashedPassword, UserWithRels
 
 
-class UsersRepository(BaseRepisitory):
+class UsersRepository(BaseRepository):
     model = UsersOrm
     schema = User
 

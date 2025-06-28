@@ -1,6 +1,4 @@
-
-
-from pydantic import BaseModel, EmailStr, Field, UUID4
+from pydantic import BaseModel, UUID4
 
 
 class HandleTransaction(BaseModel):

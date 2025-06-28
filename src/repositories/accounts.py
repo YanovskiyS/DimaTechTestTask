@@ -3,12 +3,12 @@ from sqlalchemy import select
 
 
 from src.models.accounts import AccountOrm
-from src.repositories.base import BaseRepisitory
+from src.repositories.base import BaseRepository
 from src.schemas.accounts import Account, AccountForUser
 
 
 
-class AccountRepository(BaseRepisitory):
+class AccountRepository(BaseRepository):
     model = AccountOrm
     schema = Account
 

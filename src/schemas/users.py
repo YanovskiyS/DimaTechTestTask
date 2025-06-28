@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
 
-from src.schemas.accounts import Account, AccountForUser
+from src.schemas.accounts import AccountForUser
 
 
 class UserRequestAdd(BaseModel):

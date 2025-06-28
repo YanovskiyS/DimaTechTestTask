@@ -1,6 +1,4 @@
 from pydantic import BaseModel, EmailStr, Field
-from sqlalchemy import Numeric, Boolean
-from sqlalchemy.orm import Mapped, mapped_column
 
 
 class Account(BaseModel):
