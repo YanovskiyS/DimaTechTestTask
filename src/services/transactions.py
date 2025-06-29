@@ -2,6 +2,7 @@ import hashlib
 
 from src.config import settings
 
+
 def calculate_signature(data: dict):
     sorted_data = sorted(str(key) for key in data.keys() if key != "signature")
 

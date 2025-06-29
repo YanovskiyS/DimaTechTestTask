@@ -4,6 +4,7 @@ from sqlalchemy import String, Boolean
 
 from src.database import Base
 
+
 class UsersOrm(Base):
     __tablename__ = "users"
 

@@ -9,18 +9,3 @@ router = APIRouter(prefix="/transactions", tags=["Транзакции"])
 async def get_my_transactions(get_id: UserIdDep, db: DbDep):
     result = await db.transactions.get_my_transactions(user_id=get_id)
     return result
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

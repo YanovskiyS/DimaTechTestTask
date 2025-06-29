@@ -1,4 +1,3 @@
-from pydantic import EmailStr
 from sqlalchemy import select
 
 from src.models.transactions import TransactionsOrm
@@ -11,8 +10,10 @@ class TransactionRepository(BaseRepository):
     model = TransactionsOrm
     schema = AddTransaction
 
-
     async def get_my_transactions(self, **filter_by):
         query = select(self.model).filter_by(**filter_by)
         result = await self.session.execute(query)
-        return [TransactionForUser.model_validate(model, from_attributes=True) for model in result.scalars().all()]
+        return [
+            TransactionForUser.model_validate(model, from_attributes=True)
+            for model in result.scalars().all()
+        ]

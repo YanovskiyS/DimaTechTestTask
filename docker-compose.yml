@@ -1,0 +1,33 @@
+services:
+  test_task_back_service:
+    container_name: "test_task_back"
+    build:
+      context: .
+    ports:
+      - '7777:8000'
+    networks:
+      - TestTaskNetwork
+    env_file:
+      - .env
+
+  test_task_db_service:
+    image: postgres:16
+    container_name: test_task_db
+    env_file:
+      - .env
+    ports:
+      - "6432:5432"
+    volumes:
+      - pg-testdata-data:/var/lib/postgresql/data
+    networks:
+      - TestTaskNetwork
+
+volumes:
+  pg-testdata-data:
+
+networks:
+  TestTaskNetwork:
+    external: True
+
+
+

@@ -6,17 +6,16 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from src.config import settings
 
 
-
 from src.database import Base
-from src.models.accounts import AccountOrm
-from src.models.transactions import TransactionsOrm
-from src.models.users import UsersOrm
-
+from src.models.accounts import AccountOrm  # noqa: F401
+from src.models.transactions import TransactionsOrm  # noqa: F401
+from src.models.users import UsersOrm  # noqa: F401
 
 
 # this is the Alembic Config object, which provides
@@ -36,10 +35,6 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
 
-from src.database import Base
-from src.models.accounts import AccountOrm
-from src.models.transactions import TransactionsOrm
-from src.models.users import UsersOrm
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -85,9 +80,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
